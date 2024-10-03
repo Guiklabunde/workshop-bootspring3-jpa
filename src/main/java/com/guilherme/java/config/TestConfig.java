@@ -50,7 +50,17 @@ public class TestConfig implements CommandLineRunner {
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
-		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "99999", "12345");
+		p1.getCategories().add(cat2);
+		p2.getCategories().add(cat1); 
+		p2.getCategories().add(cat3);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
+		
+		productRepository.saveAllAndFlush(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		
+		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "979999", "123456");
 		User u2 = new User(null, "Xablau Silva", "xs@gmail.com", "989999", "123456");
 		
 		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.PAID, u1);
@@ -60,6 +70,5 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 	}
-	
 	
 }
